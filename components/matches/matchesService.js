@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const played_db = require('../db/played.json');
-const upcoming_db = require('../db/upcoming.json');
-const utils = require('../utils/utils');
+const played_db = require('../../db/played.json');
+const upcoming_db = require('../../db/upcoming.json');
+const utils = require('../../utils/utils');
 
 const {teamIdMap, tournamentIdMap} = utils.mapDataIds();
 const collections = { played_db, upcoming_db };
@@ -24,10 +24,13 @@ exports.getMatchesByNameAndStatus = (name, choosenStatus) => {
 
 
 
-// local utils (logical related to this script) 
+    // local utils (logical related to this script) //
 
 const getMatchesByTeamOrTournament = function(collection, name){
-    name = name.toLowerCase();
+    if(name != undefined && name !=null)
+        name = name.toLowerCase();
+    else
+        name ="";
     try{
     return Array.from(_.values(collection)).filter(match => {
         let b = filterBy(match, name);
@@ -64,8 +67,11 @@ const addMatchIds = function(match){
 }
 
 const getDataByStatus = function(choosenStatus){
-    choosenStatus = choosenStatus.toLowerCase();
-    var collection ={};
+    if(choosenStatus != undefined && choosenStatus !=null)
+        choosenStatus = choosenStatus.toLowerCase();
+    else choosenStatus = "";
+    
+    let collection ={};
     if(choosenStatus === utils.status.played){
         collection =  played_db;}
     else if(choosenStatus === utils.status.upcoming)

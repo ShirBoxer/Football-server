@@ -8,12 +8,6 @@ exports.status = {
     ok: 200,
     played: "played",
     upcoming: "upcoming",
-    // accepted: 202,
-    // badRequest: 400,
-    // unauthorized: 401,
-    // notFound: 404,
-    // notAcceptable: 406,
-    // serverError: 500,
   };
 
 
@@ -51,20 +45,25 @@ exports.mapDataIds = function() {
   _.forIn(collections, (collection) => {
     _.values(collection).forEach(match => {
         let {home_team, away_team, tournament} = match || {};
-        home_team = home_team.toLowerCase();
-        away_team = away_team.toLowerCase();
-        tournament = tournament.toLowerCase();
-        if(!teamIdMap.has(home_team)){
-          teamIdMap.set(home_team, teamId)
-          teamId++;
-        }
-        if(!teamIdMap.has(away_team)){
-          teamIdMap.set(away_team, teamId)
-          teamId++;
-        }
-        if(!tournamentIdMap.has(tournament)){
-          tournamentIdMap.set(tournament, tournamentId);
-          tournamentId++;
+        if(home_team != undefined && home_team != null &&
+            away_team != undefined && away_team != null &&
+          tournament != undefined && tournament != null)
+        {
+          home_team = home_team.toLowerCase();
+          away_team = away_team.toLowerCase();
+          tournament = tournament.toLowerCase();
+          if(!teamIdMap.has(home_team)){
+            teamIdMap.set(home_team, teamId)
+            teamId++;
+          }
+          if(!teamIdMap.has(away_team)){
+            teamIdMap.set(away_team, teamId)
+            teamId++;
+          }
+          if(!tournamentIdMap.has(tournament)){
+            tournamentIdMap.set(tournament, tournamentId);
+            tournamentId++;
+          }
         }
     });
   });

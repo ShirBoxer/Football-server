@@ -1,4 +1,4 @@
-const utils = require('../Utils/utils');
+const utils = require('../../Utils/utils');
 const matchesService = require('./matchesService');
 const _ = require('lodash');
 

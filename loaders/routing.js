@@ -4,7 +4,7 @@ const envVariables = require('../configs'); //??
 //TODO
 // const { writeLog, send } = require('../Utils/utils');
 
-const matchesApi = require('../matches/matchesApi');
+const matchesApi = require('../components/matches/matchesApi');
 
 exports.init = async () => {
     let app = expressApp.getApp();
